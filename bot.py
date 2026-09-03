@@ -20,6 +20,6 @@ async des start(self):
         self.uptime = datetime.now()
 
 self.set_parse_mode(ParseMode.HTML)
-self.LOGGER(__name__).info("
+self.LOGGER(__name__).info("Bot is Started @{self.username}")
       
 
