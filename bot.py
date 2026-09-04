@@ -42,14 +42,7 @@ class Bot(Client):
         )
 
         try:
-            await self.send_message(
-                OWNER_ID,
-                text=(
-                    "<b><blockquote>"
-                    "Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ by @PyroSznpai"
-                    "</blockquote></b>"
-                )
-            )
+            await self.send_message(OWNER_ID, text=("<b><blockquote>Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ by @PyroSznpai</blockquote></b>"))
         except Exception:
             pass
 
