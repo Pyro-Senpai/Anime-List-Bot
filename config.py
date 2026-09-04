@@ -8,19 +8,19 @@ from logging.handlers import RotatingFileHandler
 
 TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
 API_ID = int(os.environ.get("API_ID", 12345678))
-API_HASH = os.environ.get("API_HASN", "")
+API_HASH = os.environ.get("API_HASH", "")
 
 OWNER_ID = int(os.environ.get("OWNER_ID", 12345678))
 ADMIN_ID = int(os.environ.get("ADMIN_ID", 12345678))
 
-DB_URI = os.environ.get("DATABASE_URI", "")
+DB_URI = os.environ.get("DATABASE_URL", "")
 DB_NAME = os.environ.get("DB_NAME", "animelist")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "150"))
 
 if not TG_BOT_TOKEN:
     logging.warning("TG_BOT_TOKEN is not set!")
 
-if not API_ID == 0:
+if API_ID == 12345678 or not API_ID:
     logging.warning("API_ID is not set!")
 
 if not API_HASH:
