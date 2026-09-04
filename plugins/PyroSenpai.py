@@ -1,4 +1,4 @@
-from config import OWNER_ID, ADMIN_ID
+from config import OWNER_ID, ADMIN_ID, USER_REPLY_TEXT, USER_ROAST_TEXT
 from database.database import db
 
 
