@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from bot import Bot
-from config import START_MSG, STARTIMG, STATS_TEXT
+from config import START_MSG, START_IMG, BOT_STATS_TEXT
 from plugins.PyroSenpai import check_owner_or_admin
 
 @Bot.on_message(filters.command("start") & filters.private)
