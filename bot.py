@@ -13,7 +13,6 @@ from config import (
     LOGGER
 )
 
-
 class Bot(Client):
     def __init__(self):
         super().__init__(
@@ -53,3 +52,7 @@ class Bot(Client):
     def run(self):
         """Run the bot."""
         super().run()
+
+
+if __name__ == "__main__":
+    Bot().run()
