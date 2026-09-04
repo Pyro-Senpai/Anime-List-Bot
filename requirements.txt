@@ -1,4 +1,5 @@
 pyrofork
 TgCrypto
+python-dotenv
 pyromod
 motor
