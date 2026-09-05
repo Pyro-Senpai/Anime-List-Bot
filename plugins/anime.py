@@ -1,10 +1,8 @@
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.types import Message, CallbackQuery
-from config import ADMIN_ID, OWNER_ID
-from database import database
 import json
 import os
+from pyrogram import Client, filters
+from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, Message
+from config import ADMIN_ID, OWNER_ID
 
 DATA_FILE = "anime_list.json"
 ITEMS_PER_PAGE = 10
@@ -51,7 +49,7 @@ def get_anime_page(page: int = 0):
     reply_markup = InlineKeyboardMarkup(buttons) if buttons else None
     return text, reply_markup
 
-@Bot.on_message(filters.command("addanimelist") & filters.user(ADMIN_ID, OWNER_ID))
+@Client.on_message(filters.command("addanimelist") & filters.user([ADMIN_ID, OWNER_ID]))
 def add_anime(client: Client, message: Message):
     if len(message.command) < 2:
         message.reply_text("Please provide anime name. Example: /addanimelist Naruto")
@@ -62,10 +60,10 @@ def add_anime(client: Client, message: Message):
     data["anime"].append(anime_name)
     save_data(data)
     
-    message.reply_text(f"Anime saved successfully! Use /viewanimelist to see the paginated list.")
+    message.reply_text("Anime saved successfully! Use /viewanimelist to see the paginated list.")
 
-@Bot.on_message(filters.command("viewanimelist") & filters.user(ADMIN_ID))
-def view_anime_list(client, message):
+@Client.on_message(filters.command("viewanimelist") & filters.user(ADMIN_ID))
+def view_anime_list(client: Client, message: Message):
     text, reply_markup = get_anime_page(0)
     bot_username = client.get_me().username
     deep_link = f"https://t.me/{bot_username}?start=animes"
@@ -73,7 +71,7 @@ def view_anime_list(client, message):
     
     message.reply_text(text, reply_markup=reply_markup)
 
-@Bot.on_callback_query(filters.regex("^anime_page_"))
+@Client.on_callback_query(filters.regex("^anime_page_"))
 def paginate_anime(client: Client, callback_query: CallbackQuery):
     page = int(callback_query.data.split("_")[-1])
     text, reply_markup = get_anime_page(page)
@@ -81,18 +79,12 @@ def paginate_anime(client: Client, callback_query: CallbackQuery):
     callback_query.message.edit_text(text, reply_markup=reply_markup)
     callback_query.answer()
 
-@Bot.on_message(filters.command("start") & filters.regex("animes"))
+@Client.on_message(filters.command("start") & filters.regex("animes"))
 def start_with_animes(client: Client, message: Message):
     text, reply_markup = get_anime_page(0)
     message.reply_text(text, reply_markup=reply_markup)
 
-@Bot.on_message(filters.command("animes"))
-def show_anime(client, message):
+@Client.on_message(filters.command("animes"))
+def show_anime(client: Client, message: Message):
     text, reply_markup = get_anime_page(0)
     message.reply_text(text, reply_markup=reply_markup)
-
-app.run()
-
-
-
-        
