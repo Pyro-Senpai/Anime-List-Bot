@@ -4,14 +4,12 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from config import DB_URI, DB_NAME
 
 class Database:
-    def __init__(self, uri, database_name):
+    def __init__(self, uri, database_name, data_file="anime_list.json"):
+        # MongoDB Setup
         self._client = AsyncIOMotorClient(uri)
         self.db = self._client[database_name]
-
-db = Database(DB_URI, DB_NAME)
-
-class Database:
-    def __init__(self, data_file="anime_list.json"):
+        
+        # JSON Local Storage Setup
         self.data_file = data_file
 
     def load_data(self):
@@ -33,4 +31,4 @@ class Database:
         data = self.load_data()
         return data.get("anime", [])
 
-db = Database()
+db = Database(DB_URI, DB_NAME)
