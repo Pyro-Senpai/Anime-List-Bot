@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+# Add root directory to Python path to fix ModuleNotFoundError for plugins
+sys.path.append(str(Path(__file__).resolve().parent))
+
 from datetime import datetime
 
 from pyrogram import Client
